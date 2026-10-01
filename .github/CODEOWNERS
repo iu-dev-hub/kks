@@ -1,0 +1,37 @@
+# Code ownership: Bir klasördeki değişiklik, o klasörün sahibinden onay almadan
+# main dalına birleştirilemez (ruleset'te "Require review from Code Owners" açık olmalı).
+#
+# Organization: iu-dev-hub
+# Instructor:   @imyo-dev-hub  (GitHub kullanıcı adınız farklıysa bu dosyadaki
+#               tüm @imyo-dev-hub ifadelerini kendi kullanıcı adınızla değiştirin)
+#
+# ÖNEMLİ: Son eşleşen satır geçerlidir.
+# Burada listelenmeyen dosyalar (ör. tests/unit, tests/integration) için kod sahibi
+# onayı gerekmez; ruleset'teki "en az 1 onay" yeterlidir.
+
+# Module ownership
+/app/membership/                   @iu-dev-hub/team-membership
+/app/catalog/                      @iu-dev-hub/team-catalog
+/app/loans/                        @iu-dev-hub/team-loans
+/app/fines_reports/                @iu-dev-hub/team-fines-reports
+/app/templates/membership/         @iu-dev-hub/team-membership
+/app/templates/catalog/            @iu-dev-hub/team-catalog
+/app/templates/loans/              @iu-dev-hub/team-loans
+/app/templates/fines_reports/      @iu-dev-hub/team-fines-reports
+
+# Shared code and schema: affects all teams
+/app/core/                         @iu-dev-hub/scrum-masters
+/app/templates/base.html           @iu-dev-hub/scrum-masters
+/app/static/                       @iu-dev-hub/scrum-masters
+
+# End-to-end tests: QA approval required
+/tests/e2e/                        @iu-dev-hub/qa
+
+# Roles and product documents
+/ROLES.md                          @imyo-dev-hub
+/docs/                             @iu-dev-hub/product-owners
+
+# CI, repository settings and dependencies: instructor only
+/.github/                          @imyo-dev-hub
+/requirements.txt                  @imyo-dev-hub
+/pyproject.toml                    @imyo-dev-hub
