@@ -1,0 +1,7 @@
+# Kullanıcı hikâyeleri, görevler ve hata raporları Taiga'da tutulur.
+# GitHub issue'ları yalnızca Taiga kayıtlarının dosya ekleri için kullanılır.
+blank_issues_enabled: false
+contact_links:
+  - name: Kullanıcı hikâyesi, görev veya hata raporu
+    url: https://tree.taiga.io/
+    about: Bunlar Taiga'daki "Kampüs Kütüphane Sistemi" projesinde yazılır.

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block baslik %}{% endblock %} | Kampüs Kütüphane Sistemi</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='stil.css') }}">
+</head>
+<body>
+  <header>
+    <a class="logo" href="{{ url_for('anasayfa') }}">Kampüs Kütüphane Sistemi</a>
+    <nav aria-label="Ana menü">
+      <a href="{{ url_for('uyelik.index') }}">Üyelik</a>
+      <a href="{{ url_for('katalog.index') }}">Katalog</a>
+      <a href="{{ url_for('odunc.index') }}">Ödünç</a>
+      <a href="{{ url_for('ceza_rapor.index') }}">Ceza ve Rapor</a>
+    </nav>
+  </header>
+  <main>
+    {% with mesajlar = get_flashed_messages(with_categories=true) %}
+      {% for kategori, mesaj in mesajlar %}
+        <p class="mesaj {{ kategori }}" role="alert">{{ mesaj }}</p>
+      {% endfor %}
+    {% endwith %}
+    {% block icerik %}{% endblock %}
+  </main>
+  <footer>Yazılım Doğrulama ve Sınama dersi projesi</footer>
+</body>
+</html>
