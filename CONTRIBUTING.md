@@ -21,7 +21,8 @@ Dosyaları GitHub'a yükleyin (ilgili PR'a yorum olarak veya "Hata Ekleri"
 ## 2. Bir işin yolculuğu
 
 1. **PO**, Taiga'da kullanıcı hikâyesini kabul kriterleriyle yazar (ör. Taiga'da **#42**).
-2. **Sprint planlamada** hikâye sprinte alınır, puanlanır ve görevlere bölünür.
+2. **Sprint planlamada** hikâye sprinte alınır, puanlanır ve görevlere bölünür
+   (Hazır ve Bitti Tanımı: `docs/definition-of-ready-and-done.md`, Sprint 1'de birlikte yazılır).
 3. **Geliştirici** görevi üstlenir (Taiga'da kendine atar), GitHub'da dal açar.
 4. Kodu ve birim testlerini yazar, **PR** açar; hikâyeyi Taiga'da **İncelemede**'ye taşır.
 5. **CI** testleri otomatik çalıştırır. Kırmızıysa birleştirme yapılamaz.
@@ -151,3 +152,64 @@ Her öğrenci haftada **en az 2 kez** ekibinin Discussions başlığına yazar:
 1. Son yazımdan bu yana ne yaptım?
 2. Şimdi ne yapacağım?
 3. Önümde bir engel var mı?
+
+## 9. Taiga'da günlük kullanım
+
+**Hikâye durumları:** Yeni → Hazır → Yapılıyor → İncelemede → Testte → **Bitti**
+
+| Geçiş | Kim yapar? |
+|---|---|
+| Yeni → Hazır | PO (Hazır Tanımı sağlandığında) |
+| Hazır → Yapılıyor | Geliştirici (görevi üstlenince) |
+| Yapılıyor → İncelemede | Geliştirici (PR açınca) |
+| İncelemede → Testte | Geliştirici (PR birleşince) |
+| Testte → Yapılıyor | Testçi (hata bulursa, hata kaydıyla birlikte) |
+| Testte → **Bitti** | **Yalnızca PO** (kabul) |
+
+| Rol | Taiga'da ne yapar? |
+|---|---|
+| Product Owner | Hikâyeleri ve kabul kriterlerini yazar, sıralar, kabul eder |
+| Scrum Master | Sprint açar/kapatır, panoyu düzenli tutar, burndown'ı review'da gösterir |
+| Back / Front | Görevleri (task) oluşturur ve üstlenir, durumları günceller |
+| Testçi | Test görevlerini oluşturur, hata kaydı açar, hikâyeyi Testte'den ilerletir |
+
+- Her hikâyeye ekibinizin etiketini ekleyin: `team-membership`, `team-catalog`,
+  `team-loans`, `team-fines-reports` veya `core`.
+- Puanı ekip planning poker ile belirler; Back geliştirici Taiga'ya girer.
+- Hata kayıtları silinmez; gerekiyorsa **Reddedildi** durumuna alınır.
+- **Taiga'ya dosya eklemeyin** (toplam 10 MB). Bkz. Bölüm 1.
+
+## 10. Yeni modül ekleme (Sprint 1)
+
+Her ekip Sprint 1'de kendi modülünü ekler. Klasör adları sabittir, çünkü
+`CODEOWNERS` bu adlara göre tanımlıdır:
+
+| Ekip | Klasör | Blueprint adı | URL öneki |
+|---|---|---|---|
+| team-membership | `app/membership/` | `membership` | `/membership` |
+| team-catalog | `app/catalog/` | `catalog` | `/catalog` |
+| team-loans | `app/loans/` | `loans` | `/loans` |
+| team-fines-reports | `app/fines_reports/` | `fines_reports` | `/fines-reports` |
+
+Bir modülde en az şunlar olmalı:
+
+```text
+app/<module>/__init__.py       # bp nesnesini dışa açar
+app/<module>/routes.py         # sayfalar (Blueprint ve route'lar)
+app/<module>/services.py       # iş kuralları (sayfalardan ayrı, kolay test edilir)
+app/templates/<module>/index.html
+tests/integration/test_<module>.py   # en az: modül sayfası açılıyor mu?
+```
+
+Ayrıca iki ortak dosyaya birer satır eklenir:
+
+- `app/__init__.py`: modülün kaydı (`register_blueprint`)
+- `app/templates/base.html`: menüdeki bağlantı
+
+Bu iki dosyayı dört ekip aynı hafta değiştireceği için **birleştirme çatışması**
+(merge conflict) yaşayabilirsiniz. Bu beklenen bir durumdur: Çatışmayı çözmek,
+çok ekipli projelerin günlük işidir. Önce `main`'i kendi dalınıza alın
+(`git pull origin main`), çatışan satırları birlikte düzeltin, testleri çalıştırın.
+
+> İpucu: Yapay zekâdan modülü oluşturmasını isterken bu tabloyu ve
+> `app/__init__.py` ile `base.html` dosyalarını bağlam olarak verin.

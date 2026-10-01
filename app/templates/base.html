@@ -10,10 +10,9 @@
   <header>
     <a class="logo" href="{{ url_for('home') }}">Kampüs Kütüphane Sistemi</a>
     <nav aria-label="Ana menü">
-      <a href="{{ url_for('membership.index') }}">Üyelik</a>
-      <a href="{{ url_for('catalog.index') }}">Katalog</a>
-      <a href="{{ url_for('loans.index') }}">Ödünç</a>
-      <a href="{{ url_for('fines_reports.index') }}">Ceza ve Rapor</a>
+      <a href="{{ url_for('home') }}">Ana Sayfa</a>
+      {# Sprint 1: Her ekip kendi modülünün bağlantısını buraya ekler, örnek:
+         <a href="{{ url_for('loans.index') }}">Ödünç</a> #}
     </nav>
   </header>
   <main>

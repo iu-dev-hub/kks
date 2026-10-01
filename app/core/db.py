@@ -9,6 +9,7 @@ from pathlib import Path
 
 import click
 from flask import Flask, current_app, g
+from flask.cli import with_appcontext
 
 SCHEMA_FILE = Path(__file__).with_name("schema.sql")
 
@@ -36,6 +37,7 @@ def init_db() -> None:
 
 
 @click.command("init-db")
+@with_appcontext
 def init_db_command() -> None:
     init_db()
     click.echo("Database initialized.")

@@ -1,11 +1,8 @@
 """Kampüs Kütüphane Sistemi (KKS) - application factory.
 
-Her modül bir Flask Blueprint'tir ve ayrı bir ekibe aittir:
-    app/membership/     -> Team Membership    (Üyelik)
-    app/catalog/        -> Team Catalog       (Katalog)
-    app/loans/          -> Team Loans         (Ödünç)
-    app/fines_reports/  -> Team Fines-Reports (Ceza ve Rapor)
-    app/core/           -> Tüm ekipler (değişiklikler Scrum of Scrums'ta konuşulur)
+Bu, çalışan en küçük uygulamadır. Modüller (membership, catalog, loans,
+fines_reports) Sprint 1'de ekipler tarafından eklenecektir.
+Nasıl yapılacağı: CONTRIBUTING.md, "Yeni modül ekleme" bölümü.
 """
 
 import os
@@ -29,15 +26,12 @@ def create_app(test_config: dict | None = None) -> Flask:
     os.makedirs(app.instance_path, exist_ok=True)
     db.init_app(app)
 
-    from app.catalog import bp as catalog_bp
-    from app.fines_reports import bp as fines_reports_bp
-    from app.loans import bp as loans_bp
-    from app.membership import bp as membership_bp
-
-    app.register_blueprint(membership_bp)
-    app.register_blueprint(catalog_bp)
-    app.register_blueprint(loans_bp)
-    app.register_blueprint(fines_reports_bp)
+    # --- Module blueprints -------------------------------------------------
+    # Her ekip Sprint 1'de kendi modülünü buraya kaydeder (alfabetik sırayla):
+    #
+    #   from app.loans import bp as loans_bp
+    #   app.register_blueprint(loans_bp)
+    # -----------------------------------------------------------------------
 
     @app.route("/")
     def home():

@@ -1,4 +1,4 @@
-# Code ownership: Bir klasördeki değişiklik, o klasörün sahibinden onay almadan
+# Code ownership: Bir dosyadaki değişiklik, o dosyanın sahibinden onay almadan
 # main dalına birleştirilemez (ruleset'te "Require review from Code Owners" açık olmalı).
 #
 # Organization: iu-dev-hub
@@ -6,10 +6,11 @@
 #               tüm @imyo-dev-hub ifadelerini kendi kullanıcı adınızla değiştirin)
 #
 # ÖNEMLİ: Son eşleşen satır geçerlidir.
-# Burada listelenmeyen dosyalar (ör. tests/unit, tests/integration) için kod sahibi
-# onayı gerekmez; ruleset'teki "en az 1 onay" yeterlidir.
+# Modül klasörleri Sprint 1'de oluşturulacaktır; sahiplikleri şimdiden tanımlıdır.
+# Burada listelenmeyen dosyalar için kod sahibi onayı gerekmez; ruleset'teki
+# "en az 1 onay" yeterlidir.
 
-# Module ownership
+# Module ownership (folders created in Sprint 1)
 /app/membership/                   @iu-dev-hub/team-membership
 /app/catalog/                      @iu-dev-hub/team-catalog
 /app/loans/                        @iu-dev-hub/team-loans
@@ -19,7 +20,8 @@
 /app/templates/loans/              @iu-dev-hub/team-loans
 /app/templates/fines_reports/      @iu-dev-hub/team-fines-reports
 
-# Shared code and schema: affects all teams
+# Shared code, schema and layout: affects all teams
+/app/__init__.py                   @iu-dev-hub/scrum-masters
 /app/core/                         @iu-dev-hub/scrum-masters
 /app/templates/base.html           @iu-dev-hub/scrum-masters
 /app/static/                       @iu-dev-hub/scrum-masters
@@ -27,11 +29,17 @@
 # End-to-end tests: QA approval required
 /tests/e2e/                        @iu-dev-hub/qa
 
-# Roles and product documents
-/ROLES.md                          @imyo-dev-hub
+# Team agreements (written by students)
 /docs/                             @iu-dev-hub/product-owners
+/docs/definition-of-ready-and-done.md  @iu-dev-hub/scrum-masters
+/docs/interface-contract.md        @iu-dev-hub/scrum-masters
 
-# CI, repository settings and dependencies: instructor only
+# Customer documents (instructor = customer)
+/docs/product-vision.md            @imyo-dev-hub
+/docs/business-rules.md            @imyo-dev-hub
+
+# Roles, CI, repository settings and dependencies: instructor only
+/ROLES.md                          @imyo-dev-hub
 /.github/                          @imyo-dev-hub
 /requirements.txt                  @imyo-dev-hub
 /pyproject.toml                    @imyo-dev-hub
